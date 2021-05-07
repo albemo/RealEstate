@@ -23,5 +23,9 @@ namespace RealEstate.Domain.ViewModels
         public int? OwnerId { get; set; }
 
         public OwnerViewModel Owner { get; set; }
+
+        public virtual IList<PropertyImageViewModel> PropertyImages { get; set; } = new List<PropertyImageViewModel>();
+
+        public virtual IList<PropertyTraceViewModel> PropertyTraces { get; set; } = new List<PropertyTraceViewModel>();
     }
 }

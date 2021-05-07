@@ -24,6 +24,8 @@ namespace RealEstate.WebApi.Controllers
         {
             var item = await _propertyService.Query()
                 .Include(x => x.Owner)
+                .Include(x => x.PropertyImages)
+                .Include(x => x.PropertyTraces)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (item == null)
@@ -45,7 +47,23 @@ namespace RealEstate.WebApi.Controllers
                     Address = item.Owner.Address,
                     Bithday = item.Owner.Bithday,
                     Name = item.Owner.Name
-                }
+                },
+                PropertyTraces = item.PropertyTraces.Select(x => new PropertyTraceViewModel
+                {
+                    Id = x.Id,
+                    DateSale = x.DateSale,
+                    Name = x.Name,
+                    PropertyId = x.PropertyId,
+                    Tax = x.Tax,
+                    Value = x.Value
+                }).ToList(),
+                PropertyImages = item.PropertyImages.Select(x => new PropertyImageViewModel
+                {
+                    Id = x.Id,
+                    Enabled = x.Enabled,
+                    File = x.File,
+                    PropertyId = x.PropertyId
+                }).ToList()
             };
 
             return Ok(model);

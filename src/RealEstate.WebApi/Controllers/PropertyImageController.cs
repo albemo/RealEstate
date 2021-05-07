@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RealEstate.Domain.Models;
 using RealEstate.Domain.ViewModels;
 using RealEstate.WebApi.Services;
@@ -21,7 +22,9 @@ namespace RealEstate.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var item = await _propertyImageService.GetByIdAsync(id);
+            var item = await _propertyImageService.Query()
+                .Include(x => x.Property)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (item == null)
                 return NotFound($"propertyimage with id {id} not found");

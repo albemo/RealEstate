@@ -56,7 +56,6 @@ namespace CyberMaster.Backend.WebApi.Controllers
             return Ok(result);
         }
 
-        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -70,18 +69,7 @@ namespace CyberMaster.Backend.WebApi.Controllers
             var result = await _userManager.CreateAsync(userToCreate, model.Password);
 
             if (result.Succeeded)
-            {
-                var user = await _userManager.FindByNameAsync(model.UserName);
-
-                // add role to user
-                //await _userManager.AddToRoleAsync(user, model.Role);
-
-                //var claim = new Claim("ModuleTitle", model.ModuleTitle);
-
-                //await _userManager.AddClaimAsync(user, claim);
-
                 return Ok(result);
-            }
 
             return BadRequest(result);
         }

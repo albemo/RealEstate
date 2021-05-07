@@ -10,7 +10,7 @@ using RealEstate.Infrasctructure.Data;
 namespace RealEstate.Infrasctructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210507200000_Initial")]
+    [Migration("20210507231536_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -261,9 +261,6 @@ namespace RealEstate.Infrasctructure.Migrations
                     b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OwnerId1")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(9,2)");
 
@@ -273,8 +270,6 @@ namespace RealEstate.Infrasctructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerId");
-
-                    b.HasIndex("OwnerId1");
 
                     b.ToTable("Properties");
                 });
@@ -295,14 +290,9 @@ namespace RealEstate.Infrasctructure.Migrations
                     b.Property<int?>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PropertyId1")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PropertyId");
-
-                    b.HasIndex("PropertyId1");
 
                     b.ToTable("PropertyImages");
                 });
@@ -323,9 +313,6 @@ namespace RealEstate.Infrasctructure.Migrations
                     b.Property<int?>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PropertyId1")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Tax")
                         .HasColumnType("decimal(5,2)");
 
@@ -335,8 +322,6 @@ namespace RealEstate.Infrasctructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PropertyId");
-
-                    b.HasIndex("PropertyId1");
 
                     b.ToTable("PropertyTraces");
                 });
@@ -395,12 +380,8 @@ namespace RealEstate.Infrasctructure.Migrations
             modelBuilder.Entity("RealEstate.Domain.Models.Property", b =>
                 {
                     b.HasOne("RealEstate.Domain.Models.Owner", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId");
-
-                    b.HasOne("RealEstate.Domain.Models.Owner", null)
                         .WithMany("Properties")
-                        .HasForeignKey("OwnerId1");
+                        .HasForeignKey("OwnerId");
 
                     b.Navigation("Owner");
                 });
@@ -408,12 +389,8 @@ namespace RealEstate.Infrasctructure.Migrations
             modelBuilder.Entity("RealEstate.Domain.Models.PropertyImage", b =>
                 {
                     b.HasOne("RealEstate.Domain.Models.Property", "Property")
-                        .WithMany()
-                        .HasForeignKey("PropertyId");
-
-                    b.HasOne("RealEstate.Domain.Models.Property", null)
                         .WithMany("PropertyImages")
-                        .HasForeignKey("PropertyId1");
+                        .HasForeignKey("PropertyId");
 
                     b.Navigation("Property");
                 });
@@ -421,12 +398,8 @@ namespace RealEstate.Infrasctructure.Migrations
             modelBuilder.Entity("RealEstate.Domain.Models.PropertyTrace", b =>
                 {
                     b.HasOne("RealEstate.Domain.Models.Property", "Property")
-                        .WithMany()
-                        .HasForeignKey("PropertyId");
-
-                    b.HasOne("RealEstate.Domain.Models.Property", null)
                         .WithMany("PropertyTraces")
-                        .HasForeignKey("PropertyId1");
+                        .HasForeignKey("PropertyId");
 
                     b.Navigation("Property");
                 });

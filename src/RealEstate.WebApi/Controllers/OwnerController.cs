@@ -25,6 +25,7 @@ namespace RealEstate.WebApi.Controllers
         {
             var item = await _ownerService.Query()
                 .Include(x => x.Properties)
+                    //.ThenInclude(x => x.PropertyTraces)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (item == null)

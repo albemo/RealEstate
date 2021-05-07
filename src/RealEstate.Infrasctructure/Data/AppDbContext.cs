@@ -23,29 +23,24 @@ namespace RealEstate.Infrasctructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Property>()
+                .HasOne<Owner>(x => x.Owner)
+                .WithMany(x => x.Properties)
+                .HasForeignKey(x => x.OwnerId);
+
+
+            modelBuilder.Entity<PropertyImage>()
+                .HasOne<Property>(x => x.Property)
+                .WithMany(x => x.PropertyImages)
+                .HasForeignKey(x => x.PropertyId);
+
+
+            modelBuilder.Entity<PropertyTrace>()
+                .HasOne<Property>(x => x.Property)
+                .WithMany(x => x.PropertyTraces)
+                .HasForeignKey(x => x.PropertyId);
+
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Owner>(p =>
-            {
-                p.HasMany(x => x.Properties).WithOne(x => x.Owner).HasForeignKey(y => y.OwnerId);
-            });
-
-            modelBuilder.Entity<Property>(p =>
-            {
-                p.HasOne(x => x.Owner).WithMany().HasForeignKey(y => y.OwnerId);
-                p.HasMany(x => x.PropertyImages).WithOne(x => x.Property).HasForeignKey(x => x.PropertyId);
-                p.HasMany(x => x.PropertyTraces).WithOne(x => x.Property).HasForeignKey(x => x.PropertyId);
-            });
-
-            modelBuilder.Entity<PropertyImage>(p =>
-            {
-                p.HasOne(x => x.Property).WithMany().HasForeignKey(y => y.PropertyId);
-            });
-
-            modelBuilder.Entity<PropertyTrace>(p =>
-            {
-                p.HasOne(x => x.Property).WithMany().HasForeignKey(y => y.PropertyId);
-            });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

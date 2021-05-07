@@ -181,8 +181,7 @@ namespace RealEstate.Infrasctructure.Migrations
                     Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
                     CodeInterval = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Year = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OwnerId = table.Column<int>(type: "int", nullable: true),
-                    OwnerId1 = table.Column<int>(type: "int", nullable: true)
+                    OwnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,12 +189,6 @@ namespace RealEstate.Infrasctructure.Migrations
                     table.ForeignKey(
                         name: "FK_Properties_Owners_OwnerId",
                         column: x => x.OwnerId,
-                        principalTable: "Owners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Properties_Owners_OwnerId1",
-                        column: x => x.OwnerId1,
                         principalTable: "Owners",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -209,8 +202,7 @@ namespace RealEstate.Infrasctructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PropertyId = table.Column<int>(type: "int", nullable: true),
                     File = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false),
-                    PropertyId1 = table.Column<int>(type: "int", nullable: true)
+                    Enabled = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -218,12 +210,6 @@ namespace RealEstate.Infrasctructure.Migrations
                     table.ForeignKey(
                         name: "FK_PropertyImages_Properties_PropertyId",
                         column: x => x.PropertyId,
-                        principalTable: "Properties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PropertyImages_Properties_PropertyId1",
-                        column: x => x.PropertyId1,
                         principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -239,8 +225,7 @@ namespace RealEstate.Infrasctructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
                     Tax = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
-                    PropertyId = table.Column<int>(type: "int", nullable: true),
-                    PropertyId1 = table.Column<int>(type: "int", nullable: true)
+                    PropertyId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -248,12 +233,6 @@ namespace RealEstate.Infrasctructure.Migrations
                     table.ForeignKey(
                         name: "FK_PropertyTraces_Properties_PropertyId",
                         column: x => x.PropertyId,
-                        principalTable: "Properties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PropertyTraces_Properties_PropertyId1",
-                        column: x => x.PropertyId1,
                         principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -304,29 +283,14 @@ namespace RealEstate.Infrasctructure.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Properties_OwnerId1",
-                table: "Properties",
-                column: "OwnerId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PropertyImages_PropertyId",
                 table: "PropertyImages",
                 column: "PropertyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PropertyImages_PropertyId1",
-                table: "PropertyImages",
-                column: "PropertyId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PropertyTraces_PropertyId",
                 table: "PropertyTraces",
                 column: "PropertyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PropertyTraces_PropertyId1",
-                table: "PropertyTraces",
-                column: "PropertyId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
