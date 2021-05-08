@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RealEstate.Domain.Models
 {
-    public class Property
+    public record Property()
     {
         public int Id { get; set; }
 

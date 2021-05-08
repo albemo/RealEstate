@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstate.Domain.Models
 {
-    public class Owner
+    public record Owner
     {
         public int Id { get; set; }
 

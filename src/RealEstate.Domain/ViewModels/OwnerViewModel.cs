@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RealEstate.Domain.ViewModels
 {
-    public class OwnerViewModel
+    public record OwnerViewModel
     {
         public int Id { get; set; }
 

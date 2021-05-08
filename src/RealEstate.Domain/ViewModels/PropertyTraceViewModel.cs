@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstate.Domain.ViewModels
 {
-    public class PropertyTraceViewModel
+    public record PropertyTraceViewModel
     {
         public int Id { get; set; }
 

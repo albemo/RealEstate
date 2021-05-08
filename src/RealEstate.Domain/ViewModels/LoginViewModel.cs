@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RealEstate.Domain.ViewModels
 {
-    public class LoginViewModel
+    public record LoginViewModel
     {
         [Required]
         public string UserName { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstate.Domain.Models
 {
-    public class PropertyImage
+    public record PropertyImage
     {
         public int Id { get; set; }
 

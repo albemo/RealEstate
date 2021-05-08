@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RealEstate.Domain.Models
 {
-    public class PropertyTrace
+    public record PropertyTrace
     {
         public int Id { get; set; }
 
