@@ -27,7 +27,7 @@ namespace RealEstate.Infrasctructure.Repository
 
         public async Task<IList<TEntity>> GetAllAsync()
         {
-            return await _dbContext.Set<TEntity>().ToListAsync();
+            return await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity entity)
